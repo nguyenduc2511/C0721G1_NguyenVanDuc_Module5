@@ -1,0 +1,13 @@
+<p>calculator works!</p>
+<label class="form-label">Input Number One</label>
+<input type="number" class="form-control" (change)="getNumberOne($event.target.value)">
+
+<label class="form-label">Input Number Two</label>
+<input type="number" class="form-control" (change)="getNumberTwo($event.target.value)">
+
+<button type="button" value="+" class="btn btn-primary" (click)="showResult($event.target.value) ">Add</button>
+<button type="button" value="-" class="btn btn-primary" (click)="showResult($event.target.value) ">Sub</button>
+<button type="button" value="*" class="btn btn-primary" (click)="showResult($event.target.value) ">Multiple</button>
+<button type="button" value="/" class="btn btn-primary" (click)="showResult($event.target.value) ">Divide</button>
+<br>
+<p class="bg-light">Result {{result}}</p>
