@@ -9,6 +9,8 @@ import { PetComponent } from './pet/pet.component';
 import { ProductComponent } from './product/product.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { ColorComponent } from './color/color.component';
+import {ProductPageComponent} from "./product-page/product-page.component";
+import {StockStatusComponent} from "./stock-status/stock-status.component";
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ColorComponent } from './color/color.component';
     PetComponent,
     ProductComponent,
     CalculatorComponent,
-    ColorComponent
+    ColorComponent,
+    ProductPageComponent,
+    StockStatusComponent
   ],
   imports: [
     BrowserModule,
