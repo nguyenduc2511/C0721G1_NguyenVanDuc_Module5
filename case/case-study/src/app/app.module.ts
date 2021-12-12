@@ -10,6 +10,13 @@ import { FooterComponent } from './page_layout/footer/footer.component';
 import { HeaderComponent } from './page_layout/header/header.component';
 import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
+import {DeleteCustomerComponent} from './customer/delete-customer/delete-customer.component';
+import {EditCustomerComponent} from './customer/edit-customer/edit-customer.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {ListEmployeeComponent} from './employee/list-employee/list-employee.component';
+import {CreateEmployeeComponent} from './employee/create-employee/create-employee.component';
+import {DeleteEmployeeComponent} from './employee/delete-employee/delete-employee.component';
+import {EditEmployeeComponent} from './employee/edit-employee/edit-employee.component';
 
 
 @NgModule({
@@ -17,6 +24,12 @@ import {HttpClientModule} from '@angular/common/http';
     AppComponent,
     CreateCustomerComponent,
     ListCustomerComponent,
+    DeleteCustomerComponent,
+    EditCustomerComponent,
+    ListEmployeeComponent,
+    CreateEmployeeComponent,
+    DeleteEmployeeComponent,
+    EditEmployeeComponent,
     HomeComponent,
     FooterComponent,
     HeaderComponent
@@ -27,7 +40,8 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

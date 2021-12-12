@@ -1,27 +1,30 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerType} from '../customer-type';
-import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {CustomerService} from '../../case-service/customer/customer.service';
-import {CustomerTypeService} from '../../case-service/customer/customer-type.service';
+import {Customer} from '../customer';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {CustomerService} from '../../case-service/customer/customer.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CustomerTypeService} from '../../case-service/customer/customer-type.service';
 
 @Component({
-  selector: 'app-create-customer',
-  templateUrl: './create-customer.component.html',
-  styleUrls: ['./create-customer.component.css']
+  selector: 'app-edit-customer',
+  templateUrl: './edit-customer.component.html',
+  styleUrls: ['./edit-customer.component.css']
 })
-export class CreateCustomerComponent implements OnInit {
+export class EditCustomerComponent implements OnInit {
 
   constructor(
-    private http: HttpClient,
-    private router: Router,
     private customerService: CustomerService,
-    private customerTypeService: CustomerTypeService
+    private customerTypeService: CustomerTypeService,
+    private activeRouter: ActivatedRoute,
+    private router: Router
   ) {
   }
+
   customerTypeArr: CustomerType[];
+
   customerForm: FormGroup = new FormGroup({
+    id: new FormControl(),
     customer_code: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^(KH-)[\\d]{4}$')])),
     customer_name: new FormControl('', Validators.compose([Validators.required])),
     customer_birthday: new FormControl('', Validators.compose([Validators.required])),
@@ -33,7 +36,6 @@ export class CreateCustomerComponent implements OnInit {
     customer_address: new FormControl('', Validators.compose([Validators.required])),
     customer_type: new FormControl('', Validators.compose([Validators.required])),
   });
-
 
   validationMessage = {
     customer_code: [
@@ -55,28 +57,31 @@ export class CreateCustomerComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.customerTypeService.getAll().subscribe(
-      (next) => {
-        console.log(next);
+    this.customerTypeService.getAll().subscribe((next) => {
         this.customerTypeArr = next;
-      },
-      (error) => {
-        console.log(error);
+        console.log(this.customerTypeArr);
+        this.activeRouter.paramMap.subscribe((paramMap) => {
+          // tslint:disable-next-line:variable-name
+          const id_Cus = +paramMap.get('id');
+          // tslint:disable-next-line:no-shadowed-variable
+          this.customerService.findById(id_Cus).subscribe((next) => {
+            try {
+              this.customerForm.setValue(next);
+            } catch (e) {
+              console.log('errors');
+            }
+          });
+        });
       }
     );
   }
 
-  onCreate() {
+  onUpdate() {
     if (this.customerForm.valid) {
-      this.customerService.createCustomer(this.customerForm.value).subscribe(
-        (next) => {
-          console.log(next);
-          this.router.navigateByUrl('/customer');
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      this.customerService.updateCustomer(this.customerForm.value).subscribe((next) => {
+        console.log(next + 'Form here');
+        this.router.navigateByUrl('/customer');
+      });
     }
   }
 

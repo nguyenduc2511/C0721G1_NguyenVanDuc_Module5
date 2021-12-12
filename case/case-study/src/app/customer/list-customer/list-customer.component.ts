@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Customer} from '../customer';
 import {Router} from '@angular/router';
-import {CustomerService} from '../../case-service/customer-service/customer.service';
+import {CustomerService} from '../../case-service/customer/customer.service';
 
 @Component({
   selector: 'app-list-customer',
@@ -23,8 +23,10 @@ export class ListCustomerComponent implements OnInit {
   }
 
   showEdit(id: number) {
+    this.router.navigate(['customer', 'edit', id]);
   }
 
   showDelete(id: number) {
+    this.router.navigate(['customer', 'delete', id]);
   }
 }
