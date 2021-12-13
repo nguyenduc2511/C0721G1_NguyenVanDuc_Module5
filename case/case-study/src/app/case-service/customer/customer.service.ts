@@ -20,7 +20,7 @@ export class CustomerService {
     return this.http.get(this.URL_CUSTOMER + '/' + id);
   }
 
-  createCustomer(customer: Customer) {
+  createCustomer(customer): Observable<any> {
     return this.http.post(this.URL_CUSTOMER, customer);
   }
 

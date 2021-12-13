@@ -11,6 +11,7 @@ import {CustomerService} from '../../case-service/customer/customer.service';
 export class ListCustomerComponent implements OnInit {
 
   customerArr: Customer[];
+  p: number = 1;
 
   constructor(private  router: Router, private customerService: CustomerService) {
     this.customerService.getAll().subscribe(
