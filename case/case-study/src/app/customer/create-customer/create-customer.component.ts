@@ -28,6 +28,7 @@ export class CreateCustomerComponent implements OnInit {
     customer_gender: new FormControl('', Validators.compose([Validators.required])),
     customer_idCard: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^([0-9]{12})$|^([0-9]{9})$')])),
     customer_phone: new FormControl('', Validators.compose([Validators.required])),
+    // tslint:disable-next-line:max-line-length
     // customer_phone: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^((\\(84\\)\\+(90))|(090)|(091)|(\\(84\\)\\+(91)))[\\d]{7}$')])),
     customer_email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
     customer_address: new FormControl('', Validators.compose([Validators.required])),

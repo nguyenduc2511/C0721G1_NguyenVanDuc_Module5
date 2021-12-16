@@ -11,7 +11,9 @@ import {CustomerService} from '../../case-service/customer/customer.service';
 export class ListCustomerComponent implements OnInit {
 
   customerArr: Customer[];
-  p: number = 1;
+  p = 1;
+  idD: number;
+  nameD: string;
 
   constructor(private  router: Router, private customerService: CustomerService) {
     this.customerService.getAll().subscribe(
@@ -29,5 +31,18 @@ export class ListCustomerComponent implements OnInit {
 
   showDelete(id: number) {
     this.router.navigate(['customer', 'delete', id]);
+  }
+
+  sendDelete(id: number, customer_name: string) {
+    this.idD = id;
+    this.nameD = customer_name;
+  }
+
+  DeleteCustomer(idD) {
+    this.customerService.deleteCustomer(idD).subscribe((next) => {
+      this.customerService.getAll().subscribe(
+        next => this.customerArr = next,
+        error => console.log(error));
+    });
   }
 }
